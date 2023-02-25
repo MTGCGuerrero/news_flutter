@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:newsapp/src/models/category_model.dart';
@@ -19,6 +20,7 @@ class NewsService with ChangeNotifier {
     Category(FontAwesomeIcons.addressCard, 'general'),
     Category(FontAwesomeIcons.headSideVirus, 'health'),
     Category(FontAwesomeIcons.vials, 'science'),
+    // ignore: deprecated_member_use
     Category(FontAwesomeIcons.volleyballBall, 'sports'),
     Category(FontAwesomeIcons.memory, 'technology'),
   ];
