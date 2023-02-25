@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:newsapp/src/pages/tab1_page.dart';
+import 'package:newsapp/src/pages/tab2_page.dart';
 
 import 'package:provider/provider.dart';
 

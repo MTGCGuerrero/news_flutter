@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:http/http.dart' as http;
+import 'package:newsapp/src/models/category_model.dart';
+import 'package:newsapp/src/models/news_models.dart';
 
 final _URL_NEWS = 'https://newsapi.org/v2';
 final _APIKEY = '431a2b39236d43baaafbf67530faa12d';
@@ -27,15 +29,13 @@ class NewsService with ChangeNotifier {
     getTopHeadlines();
 
     categories.forEach((item) {
-      categoryArticles[item.name] = new List();
+      categoryArticles[item.name] = [];
     });
 
     getArticlesByCategory(_selectedCategory);
   }
 
   bool get isLoading => _isLoading;
-
-  get selectedCategory => _selectedCategory;
   set selectedCategory(String valor) {
     _selectedCategory = valor;
 
@@ -49,7 +49,7 @@ class NewsService with ChangeNotifier {
 
   getTopHeadlines() async {
     final url = '$_URL_NEWS/top-headlines?apiKey=$_APIKEY&country=ca';
-    final resp = await http.get(url);
+    final resp = await http.get(Uri.parse(url));
 
     final newsResponse = newsResponseFromJson(resp.body);
 
@@ -66,11 +66,11 @@ class NewsService with ChangeNotifier {
 
     final url =
         '$_URL_NEWS/top-headlines?apiKey=$_APIKEY&country=ca&category=$category';
-    final resp = await http.get(url);
+    final resp = await http.get(Uri.parse(url));
 
     final newsResponse = newsResponseFromJson(resp.body);
 
-    categoryArticles[category].addAll(newsResponse.articles);
+    categoryArticles[category]?.addAll(newsResponse.articles);
 
     _isLoading = false;
     notifyListeners();
