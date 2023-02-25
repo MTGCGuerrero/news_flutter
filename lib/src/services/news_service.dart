@@ -46,8 +46,9 @@ class NewsService with ChangeNotifier {
     notifyListeners();
   }
 
-  List<Article> get getArticulosCategoriaSeleccionada =>
-      categoryArticles[selectedCategory];
+  List<Article>? get getArticulosCategoriaSeleccionada =>
+      categoryArticles[_selectedCategory];
+      
 
   getTopHeadlines() async {
     final url = '$_URL_NEWS/top-headlines?apiKey=$_APIKEY&country=ca';
@@ -60,7 +61,7 @@ class NewsService with ChangeNotifier {
   }
 
   getArticlesByCategory(String category) async {
-    if (categoryArticles[category].length > 0) {
+    if (categoryArticles[category]!.isNotEmpty) {
       _isLoading = false;
       notifyListeners();
       return categoryArticles[category];
